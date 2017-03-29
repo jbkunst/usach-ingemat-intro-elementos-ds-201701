@@ -1,0 +1,13 @@
+file	prob	texto
+data/eh.txt	0.7	creo que el otro equipo no es fuerte como para ganarles
+data/gt.txt	0.5	Porque no se de futbol y me parece que ambos equipos tienen iguales probabilidades de ganar
+data/hg.txt	0.9	chile es muy superior
+data/jp.txt	0.8	La verdad es que no soy muy fanática del fútbol. Sin embargo, pienso que Chile tiene ventajas (futbolísticamente hablando) sobre cualquier país de América Latina, excepto con Argentina y Brasil.
+data/jz.txt	0.8	por que después de perder con Argentina, la selección buscará ganar a toda costa
+data/lm.txt	0.7	"vuelve Vidal y el dt se dió cuenta que se necesita un goleador de area (Paredes o Castillo) y Venezuela por su juego viene mas ""débil"" que Argentina y Chile está necesitado por los puntos."
+data/nd.txt	0.8	la verdad es que no tengo ninguna raz?n aparte de mi intuici?n (casi siempre acierto los resultados)
+data/pa.txt	1.0	Porque al tipo que dirige la selección rival lo goleó la selección chilena del 98' y seguramente todavía le dura el estrés postraumático.
+data/pc.txt	0.5	todo depende de cuÃ¡n seguros se sientan, si van con todo el fuÃ¡ ganan.
+data/pm.txt	0.75	Porque Chile posee un buen equipo y es el actual bicampeón de América, aunque falta que 
+data/yd.txt	0.7	por que tengo fe en la roja y el partido con argentina fue injusto 
+data/yr.txt	0.8	Porque Chile mostró un buen nivel con Argentina, juegan de locales y se recupera Arturo Vidal
