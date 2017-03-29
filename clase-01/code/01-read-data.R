@@ -46,6 +46,7 @@ data <- data_frame(
   texto = map_chr(texto, 2)
 ) 
 
+data
 
 write_tsv(data, "output/datos_casi_limpios.txt")
 

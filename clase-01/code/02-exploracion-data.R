@@ -36,23 +36,22 @@ datac
 library(rvest)
 
 html <- read_html("http://www.ranks.nl/stopwords/spanish")
-stopwrods <- html_node(html, "table") 
-stopwrods <- html_text(stopwrods)
-stopwrods <- str_split(stopwrods, " ")
-stopwrods <- unlist(stopwrods)
+stopwords <- html_node(html, "table") 
+stopwords <- html_text(stopwords)
+stopwords <- str_split(stopwords, " ")
+stopwords <- unlist(stopwords)
 
 
 html <- read_html("https://es.wikipedia.org/wiki/Preposici%C3%B3n")
 dataprep <- html_table(html)[[1]]
 
-datac <- filter(datac, !palabra %in% stopwrods)
+datac <- filter(datac, !palabra %in% stopwords)
 datac <- filter(datac, !palabra %in% dataprep$Preposición)
 datac <- filter(datac, !palabra %in% c("que", "n"))
 datac <- filter(datac, n > 2)
 
 ggplot(datac) +
   geom_col(aes(x = palabra, y = n))
-
 
 datas <- summarise(group_by(datap, palabra),
           probmedia = mean(prob),
@@ -62,7 +61,7 @@ datas <- summarise(group_by(datap, palabra),
 
 datas
 
-datas <- filter(datas, !palabra %in% stopwrods)
+datas <- filter(datas, !palabra %in% stopwords)
 datas <- filter(datas, !palabra %in% dataprep$Preposición)
 datas <- filter(datas, !palabra %in% c("que", "n"))
 datas <- filter(datas, n > 2)
@@ -79,4 +78,4 @@ p <- ggplot(datas2) +
 
 p
 
-ggsave(p, filename = "nuestro_primer_grafico.pdf", width = 16, height = 9)
+ggsave(p, filename = "output/nuestro_primer_grafico.pdf", width = 16, height = 9)

@@ -1,4 +1,5 @@
 file	prob	texto
+data/cm.txt	0.6	Porque encuentro que el desempeño que han mostrado en la cancha es óptimo, solo que mal enfocado.
 data/eh.txt	0.7	creo que el otro equipo no es fuerte como para ganarles
 data/gt.txt	0.5	Porque no se de futbol y me parece que ambos equipos tienen iguales probabilidades de ganar
 data/hg.txt	0.9	chile es muy superior
