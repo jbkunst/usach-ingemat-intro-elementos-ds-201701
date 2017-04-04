@@ -1,10 +1,13 @@
 # usach-ingemat-intro-r-ds-201701
-Seminario Introducción R & Data Science
+
+Seminario Introducción R & Data Science. Nos basaremos principalmente 
+de [R for Data Science](http://r4ds.had.co.nz/) de Garrett Grolemund y Hadley Wickham.
+
 
 ## Temas/Clases
 
 Exploracion:
-- Introducción a R
+- Introducción a R & Rstudio, proyectos
 - Data frames, resumenes, joins `dplyr`
 - Visualización `ggplot2`
 
