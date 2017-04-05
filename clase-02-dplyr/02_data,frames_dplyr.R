@@ -28,10 +28,10 @@ glimpse(data)
 dim(data)
 
 #' ## Verbos dplyr
-#' Seleccionar: Seleccionar columnas
-#' Filtrar: escoger filas
-#' Mutar: Crear columnas
-#' Arrange: Ordena filas
+#'  - Seleccionar: Seleccionar columnas
+#'  - Filtrar: escoger filas
+#'  - Mutar: Crear columnas
+#'  - Arrange: Ordena filas
 data2 <- select(data, satisfaccion, ramo_semestre_anterior)
 filter(data2, ano_vas >= 5)
 
@@ -42,6 +42,12 @@ data2 <- mutate(data2, ratio_sat_ram = satisfaccion/ramo_semestre_anterior)
 data2 <- select(data2, -satisfaccion)
 data2 <- arrange(data2, ratio_sat_ram)
 data2
+
+filter(data, TRUE)
+filter(data, FALSE) # SIEMPRE!! un data frame :D
+
+filter(data, satisfaccion == max(satisfaccion)
+       | ano_vas == min(ano_vas))
 
 #' Donde esta pipe?!
 data3 <- data %>% 
@@ -55,3 +61,38 @@ identical(data2, data3)
 
 #' **Imporante** Cada funcion toma un data.frame
 #' y retorna un data.frame**
+#' 
+#  - Agrupar: Agrupar y resumir
+datag <- group_by(data, ano_vas)
+
+x <- seq(1, 10)
+x
+cumsum(x)
+
+datag <- mutate(datag, satisfaccioncum = cumsum(satisfaccion))
+datag <- select(datag, ano_vas, satisfaccion, satisfaccioncum)
+datag
+
+datag <- arrange(datag, ano_vas)
+datag
+
+datag <- ungroup(datag)
+datag
+
+datag <- mutate(datag, satisfaccioncum2 = cumsum(satisfaccion))
+datag
+
+# Sumarizar: Resumir
+
+summarise(data, mav = max(ano_vas), ms = min(satisfaccion))
+data %>% summarise(mav = max(ano_vas), ms = min(satisfaccion))
+
+group_by(data, ramo_semestre) %>% 
+  summarise(mav = max(ano_vas), ms = min(satisfaccion))
+
+group_by(data, ramo_semestre) %>% 
+  summarise(mav = max(ano_vas), ms = min(satisfaccion)) %>% 
+  summarise(mav = max(mav), ms = min(ms)) 
+
+
+
