@@ -1,0 +1,58 @@
+---
+title: "Clase 02: Data frames y `dplyr`"
+output:
+  github_document:
+    html_preview: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+## Temario
+
+1. Magrittr y pipe `%>%`
+1. Definiendo data frames
+1. Manipulando data frames. Principales verbos:  select, filter, mutate, summarize, group_by.
+1. Joins
+
+## Ejemplos
+
+```{r}
+library(dplyr)
+
+x <- data_frame(key = c(1, 2, 3), val_x = c("x1", "x2", "x3"))
+x
+
+y <- data_frame(key = c(1, 2, 4), val_y = c("y1", "y2", "y3"))
+y
+
+
+left_join(x, y)
+
+semi_join(x, y)
+
+anti_join(x, y)
+
+z <- data_frame(key = c(1, 1, 2, 2, 2, 3), val_z = c(1, 2, 3, 3, 5, 6))
+z
+
+xz <- left_join(x, z) 
+xz
+
+xz %>% 
+  group_by(key) %>% 
+  summarise(conteo = n(),
+            dinstintos = n_distinct(val_z),
+            max_z = max(val_z))
+
+xz %>% 
+  select(key, val_z) %>% 
+  mutate(cumsum_z = cumsum(val_z))
+
+xz %>% 
+  select(key, val_z) %>% 
+  group_by(key) %>% 
+  mutate(cumsum_z = cumsum(val_z))
+  
+```
