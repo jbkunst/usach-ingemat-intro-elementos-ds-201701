@@ -2,16 +2,16 @@
 #' title: "Data frames dplyr"
 #' output: github_document
 #' ---
-library(dplyr) # no tienen que cargar magrittr
-
 #+echo=FALSE
 # No miren esto!
-knitr::opts_chunk$set(error=TRUE, warning = FALSE)
+knitr::opts_chunk$set(error=TRUE, warning = FALSE, message = FALSE)
 #+echo=TRUE
+library(dplyr) # no tienen que cargar magrittr
+
 
 #' dplyr ofrece funciones (en forma de verbos)
 #' para manipular data frames.
-
+#' 
 #' Cargamos nuestra super encuesta _flash_
 #' url: https://docs.google.com/spreadsheets/d/1JNwZmAdsClL6hAlnqT6VTu-DiKRohArft3W7I5J1PPk/edit#gid=0 
 # install.packages('gsheet')
@@ -35,7 +35,7 @@ dim(data)
 data2 <- select(data, satisfaccion, ramo_semestre_anterior)
 filter(data2, ano_vas >= 5)
 
-# Douhg!
+#' Douhg!
 data2 <- select(data, ano_vas, satisfaccion, ramo_semestre_anterior)
 data2 <- filter(data2, ano_vas >= 5)
 data2 <- mutate(data2, ratio_sat_ram = satisfaccion/ramo_semestre_anterior)
@@ -60,9 +60,9 @@ data3 <- data %>%
 identical(data2, data3)
 
 #' **Imporante** Cada funcion toma un data.frame
-#' y retorna un data.frame**
+#' y retorna un data.frame.
 #' 
-#  - Agrupar: Agrupar y resumir
+#' - Agrupar: Agrupar y resumir
 datag <- group_by(data, ano_vas)
 
 x <- seq(1, 10)
@@ -82,8 +82,7 @@ datag
 datag <- mutate(datag, satisfaccioncum2 = cumsum(satisfaccion))
 datag
 
-# Sumarizar: Resumir
-
+#' Sumarizar: Resumir
 summarise(data, mav = max(ano_vas), ms = min(satisfaccion))
 data %>% summarise(mav = max(ano_vas), ms = min(satisfaccion))
 

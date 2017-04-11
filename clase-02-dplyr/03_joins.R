@@ -2,6 +2,11 @@
 #' title: "Joins"
 #' output: github_document
 #' ---
+#+echo=FALSE
+knitr::opts_chunk$set(error = TRUE, message = FALSE)
+#+echo=TRUE
+#' Lectura obligada: http://r4ds.had.co.nz/relational-data.html
+#' ![inner-join](http://r4ds.had.co.nz/diagrams/join-inner.png)
 library(dplyr)
 
 x <- data_frame(key = c(1, 2, 3), val_x = c("x1", "x2", "x3"))

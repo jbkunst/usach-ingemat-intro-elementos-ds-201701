@@ -1,24 +1,15 @@
 Data frames dplyr
 ================
-Joshua
-Tue Apr 04 21:28:40 2017
+joshua.kunst
+Tue Apr 11 13:14:56 2017
 
 ``` r
 library(dplyr) # no tienen que cargar magrittr
 ```
 
-    ## 
-    ## Attaching package: 'dplyr'
+dplyr ofrece funciones (en forma de verbos) para manipular data frames.
 
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
-
-dplyr ofrece funciones (en forma de verbos) para manipular data frames. Cargamos nuestra super encuesta *flash* url: <https://docs.google.com/spreadsheets/d/1JNwZmAdsClL6hAlnqT6VTu-DiKRohArft3W7I5J1PPk/edit#gid=0>
+Cargamos nuestra super encuesta *flash* url: <https://docs.google.com/spreadsheets/d/1JNwZmAdsClL6hAlnqT6VTu-DiKRohArft3W7I5J1PPk/edit#gid=0>
 
 ``` r
 # install.packages('gsheet')
@@ -27,7 +18,7 @@ data <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1JNwZmAdsClL6hAlnqT6V
 data
 ```
 
-    ## # A tibble: 12 × 8
+    ## # A tibble: 14 × 8
     ##    persona ano_vas satisfaccion ramo_semestre ramos_que_creo_pasar
     ##      <chr>   <int>        <int>         <int>                <int>
     ## 1       jk       8           90            10                    5
@@ -42,6 +33,8 @@ data
     ## 10      pm       5           85             7                    7
     ## 11      fc       6           95             7                    7
     ## 12      yd       5           80             6                    6
+    ## 13      hg       8           75             4                    4
+    ## 14      yr       7           75             6                    6
     ## # ... with 3 more variables: ramo_semestre_anterior <int>,
     ## #   ramos_que_pase_sem_anterior <int>, profesor_buena_onda <chr>
 
@@ -54,7 +47,7 @@ Funcion: glimpse, srt, dim
 data
 ```
 
-    ## # A tibble: 12 × 8
+    ## # A tibble: 14 × 8
     ##    persona ano_vas satisfaccion ramo_semestre ramos_que_creo_pasar
     ##      <chr>   <int>        <int>         <int>                <int>
     ## 1       jk       8           90            10                    5
@@ -69,6 +62,8 @@ data
     ## 10      pm       5           85             7                    7
     ## 11      fc       6           95             7                    7
     ## 12      yd       5           80             6                    6
+    ## 13      hg       8           75             4                    4
+    ## 14      yr       7           75             6                    6
     ## # ... with 3 more variables: ramo_semestre_anterior <int>,
     ## #   ramos_que_pase_sem_anterior <int>, profesor_buena_onda <chr>
 
@@ -76,22 +71,22 @@ data
 glimpse(data)
 ```
 
-    ## Observations: 12
+    ## Observations: 14
     ## Variables: 8
     ## $ persona                     <chr> "jk", "gt", "jp", "lm", "jz", "eh"...
-    ## $ ano_vas                     <int> 8, 4, 7, 7, 7, 5, 7, 3, 5, 5, 6, 5
+    ## $ ano_vas                     <int> 8, 4, 7, 7, 7, 5, 7, 3, 5, 5, 6, 5...
     ## $ satisfaccion                <int> 90, 100, 80, 80, 90, 85, 85, 85, 8...
-    ## $ ramo_semestre               <int> 10, 7, 5, 7, 5, 7, 8, 7, 6, 7, 7, 6
-    ## $ ramos_que_creo_pasar        <int> 5, 7, 5, 7, 5, 7, 8, 5, 6, 7, 7, 6
-    ## $ ramo_semestre_anterior      <int> 10, 4, 4, 6, 3, 6, 6, 4, 6, 5, 6, 4
-    ## $ ramos_que_pase_sem_anterior <int> 5, 4, 3, 4, 3, 6, 4, 1, 4, 5, 5, 4
+    ## $ ramo_semestre               <int> 10, 7, 5, 7, 5, 7, 8, 7, 6, 7, 7, ...
+    ## $ ramos_que_creo_pasar        <int> 5, 7, 5, 7, 5, 7, 8, 5, 6, 7, 7, 6...
+    ## $ ramo_semestre_anterior      <int> 10, 4, 4, 6, 3, 6, 6, 4, 6, 5, 6, ...
+    ## $ ramos_que_pase_sem_anterior <int> 5, 4, 3, 4, 3, 6, 4, 1, 4, 5, 5, 4...
     ## $ profesor_buena_onda         <chr> "yo", "sz", "ig", "ig", "gp", "vg"...
 
 ``` r
 dim(data)
 ```
 
-    ## [1] 12  8
+    ## [1] 14  8
 
 Verbos dplyr
 ------------
@@ -106,10 +101,11 @@ data2 <- select(data, satisfaccion, ramo_semestre_anterior)
 filter(data2, ano_vas >= 5)
 ```
 
-    ## Error in eval(substitute(expr), envir, enclos): objeto 'ano_vas' no encontrado
+    ## Error in filter_impl(.data, dots): objeto 'ano_vas' no encontrado
+
+Douhg!
 
 ``` r
-# Douhg!
 data2 <- select(data, ano_vas, satisfaccion, ramo_semestre_anterior)
 data2 <- filter(data2, ano_vas >= 5)
 data2 <- mutate(data2, ratio_sat_ram = satisfaccion/ramo_semestre_anterior)
@@ -118,7 +114,7 @@ data2 <- arrange(data2, ratio_sat_ram)
 data2
 ```
 
-    ## # A tibble: 10 × 3
+    ## # A tibble: 12 × 3
     ##    ano_vas ramo_semestre_anterior ratio_sat_ram
     ##      <int>                  <int>         <dbl>
     ## 1        8                     10       9.00000
@@ -126,17 +122,19 @@ data2
     ## 3        5                      6      14.16667
     ## 4        7                      6      14.16667
     ## 5        5                      6      14.16667
-    ## 6        6                      6      15.83333
-    ## 7        5                      5      17.00000
-    ## 8        7                      4      20.00000
-    ## 9        5                      4      20.00000
-    ## 10       7                      3      30.00000
+    ## 6        7                      5      15.00000
+    ## 7        6                      6      15.83333
+    ## 8        5                      5      17.00000
+    ## 9        8                      4      18.75000
+    ## 10       7                      4      20.00000
+    ## 11       5                      4      20.00000
+    ## 12       7                      3      30.00000
 
 ``` r
 filter(data, TRUE)
 ```
 
-    ## # A tibble: 12 × 8
+    ## # A tibble: 14 × 8
     ##    persona ano_vas satisfaccion ramo_semestre ramos_que_creo_pasar
     ##      <chr>   <int>        <int>         <int>                <int>
     ## 1       jk       8           90            10                    5
@@ -151,6 +149,8 @@ filter(data, TRUE)
     ## 10      pm       5           85             7                    7
     ## 11      fc       6           95             7                    7
     ## 12      yd       5           80             6                    6
+    ## 13      hg       8           75             4                    4
+    ## 14      yr       7           75             6                    6
     ## # ... with 3 more variables: ramo_semestre_anterior <int>,
     ## #   ramos_que_pase_sem_anterior <int>, profesor_buena_onda <chr>
 
@@ -192,10 +192,11 @@ identical(data2, data3)
 
     ## [1] TRUE
 
-**Imporante** Cada funcion toma un data.frame y retorna un data.frame\*\*
+**Imporante** Cada funcion toma un data.frame y retorna un data.frame.
+
+-   Agrupar: Agrupar y resumir
 
 ``` r
-#  - Agrupar: Agrupar y resumir
 datag <- group_by(data, ano_vas)
 
 x <- seq(1, 10)
@@ -216,7 +217,7 @@ datag <- select(datag, ano_vas, satisfaccion, satisfaccioncum)
 datag
 ```
 
-    ## Source: local data frame [12 x 3]
+    ## Source: local data frame [14 x 3]
     ## Groups: ano_vas [6]
     ## 
     ##    ano_vas satisfaccion satisfaccioncum
@@ -233,13 +234,15 @@ datag
     ## 10       5           85             255
     ## 11       6           95              95
     ## 12       5           80             335
+    ## 13       8           75             165
+    ## 14       7           75             410
 
 ``` r
 datag <- arrange(datag, ano_vas)
 datag
 ```
 
-    ## Source: local data frame [12 x 3]
+    ## Source: local data frame [14 x 3]
     ## Groups: ano_vas [6]
     ## 
     ##    ano_vas satisfaccion satisfaccioncum
@@ -255,14 +258,16 @@ datag
     ## 9        7           80             160
     ## 10       7           90             250
     ## 11       7           85             335
-    ## 12       8           90              90
+    ## 12       7           75             410
+    ## 13       8           90              90
+    ## 14       8           75             165
 
 ``` r
 datag <- ungroup(datag)
 datag
 ```
 
-    ## # A tibble: 12 × 3
+    ## # A tibble: 14 × 3
     ##    ano_vas satisfaccion satisfaccioncum
     ##      <int>        <int>           <int>
     ## 1        3           85              85
@@ -276,14 +281,16 @@ datag
     ## 9        7           80             160
     ## 10       7           90             250
     ## 11       7           85             335
-    ## 12       8           90              90
+    ## 12       7           75             410
+    ## 13       8           90              90
+    ## 14       8           75             165
 
 ``` r
 datag <- mutate(datag, satisfaccioncum2 = cumsum(satisfaccion))
 datag
 ```
 
-    ## # A tibble: 12 × 4
+    ## # A tibble: 14 × 4
     ##    ano_vas satisfaccion satisfaccioncum satisfaccioncum2
     ##      <int>        <int>           <int>            <int>
     ## 1        3           85              85               85
@@ -297,18 +304,20 @@ datag
     ## 9        7           80             160              775
     ## 10       7           90             250              865
     ## 11       7           85             335              950
-    ## 12       8           90              90             1040
+    ## 12       7           75             410             1025
+    ## 13       8           90              90             1115
+    ## 14       8           75             165             1190
+
+Sumarizar: Resumir
 
 ``` r
-# Sumarizar: Resumir
-
 summarise(data, mav = max(ano_vas), ms = min(satisfaccion))
 ```
 
     ## # A tibble: 1 × 2
     ##     mav    ms
     ##   <int> <int>
-    ## 1     8    80
+    ## 1     8    75
 
 ``` r
 data %>% summarise(mav = max(ano_vas), ms = min(satisfaccion))
@@ -317,21 +326,22 @@ data %>% summarise(mav = max(ano_vas), ms = min(satisfaccion))
     ## # A tibble: 1 × 2
     ##     mav    ms
     ##   <int> <int>
-    ## 1     8    80
+    ## 1     8    75
 
 ``` r
 group_by(data, ramo_semestre) %>% 
   summarise(mav = max(ano_vas), ms = min(satisfaccion))
 ```
 
-    ## # A tibble: 5 × 3
+    ## # A tibble: 6 × 3
     ##   ramo_semestre   mav    ms
     ##           <int> <int> <int>
-    ## 1             5     7    80
-    ## 2             6     5    80
-    ## 3             7     7    80
-    ## 4             8     7    85
-    ## 5            10     8    90
+    ## 1             4     8    75
+    ## 2             5     7    80
+    ## 3             6     7    75
+    ## 4             7     7    80
+    ## 5             8     7    85
+    ## 6            10     8    90
 
 ``` r
 group_by(data, ramo_semestre) %>% 
@@ -342,4 +352,4 @@ group_by(data, ramo_semestre) %>%
     ## # A tibble: 1 × 2
     ##     mav    ms
     ##   <int> <int>
-    ## 1     8    80
+    ## 1     8    75
