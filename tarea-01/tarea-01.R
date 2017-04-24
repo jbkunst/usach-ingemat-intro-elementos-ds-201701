@@ -20,8 +20,9 @@ theme_set(theme_jbk())
 #' (esto es el código mismo) con el cual obtuvo las respuestas incluyendo 
 #' comentarios.
 #' 
-#' Se evaluará tango el código como el resulta. Con esto se intenta evitar las 
-#' respuestas _al ojo_ o usando otras herramientas como _excel_.
+#' Se evaluará tanto el código como el resultado con comentarios.
+#' Con esto se intenta evitar las  respuestas _al ojo_ o usando otras
+#'  herramientas como _excel_.
 #' 
 #' Por ejemplo, supongamos el archivo `script_grupo_1.R`
 #' 
@@ -36,8 +37,7 @@ theme_set(theme_jbk())
 #' 
 #' ```
 #' 
-#' Son libres de hacer preguntas vía mail, ya sea especifiación de las preguntas
-#' u otras cosas pero siempre háganlo escribiéndolo a todo el grupo.
+#' Son libres de hacer preguntas vía mail pero siempre háganlo escribiéndolo a todo el grupo.
 #' 
 #' Espero los script a __más tardar__ el miércoles 26 de este més (y de este año)
 #' a las 11.59 PM. Obviamente lo pueden enviar el script más tarde, la única 
@@ -45,8 +45,8 @@ theme_set(theme_jbk())
 #' cada hora que pase desde el límite. A modo de ejemplo si la nota es un 5.5, 
 #' y fue entregado a las 3AM, la nota final será:
 #' 
-nota_script <- 6.0
-nota_final <- nota_script/(1.11^3)
+nota_script <- 5.5
+nota_final <- nota_script/(1.25^3)
 round(nota_final, 1)
 #' 
 #' 
@@ -58,7 +58,7 @@ round(nota_final, 1)
 library(tidyverse)
 
 paquetes_a_instalar <- c("gapminder", "babynames", "nasaweather",
-                         "fueleconomy", "nycflights13")
+                         "fueleconomy", "nycflights13", "maps")
 
 for(p in paquetes_a_instalar) {
   message("Instalando ", p)
