@@ -1,3 +1,10 @@
+#' ---
+#' title: "Intro ggplot2"
+#' output: github_document
+#' ---
+#+ echo=FALSE
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+#+
 library(ggplot2)
 library(dplyr)
 
