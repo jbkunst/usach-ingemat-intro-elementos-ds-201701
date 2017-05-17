@@ -73,7 +73,7 @@ ggplot(dfanscombe, aes(x = x, y = res)) +
 # transformaciones --------------------------------------------------------
 df <- data_frame(
   x = 1:50,
-  y = x^2 + rnorm(length(x), sd = 25)
+  y = x^2 + rnorm(length(x), sd = 25) + 10
 )
 df
 
