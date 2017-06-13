@@ -54,7 +54,7 @@ data_test %>%
 # mod bagging -------------------------------------------------------------
 M <- 50 
 dim(data)
-P <- round(sqrt(nrow(data_train)))
+P <- round(sqrt(ncol(data_train)))
 
 haceme_un_arbolito <- function() {
   
@@ -66,7 +66,7 @@ haceme_un_arbolito <- function() {
     select(p, label) %>% 
     sample_n(nrow(data_train), replace = TRUE)
   
-  arbol_pelotita <- ctree(label ~ ., data_pelotita, control = ctree_control(maxdepth = 3))
+  arbol_pelotita <- ctree(label ~ ., data_pelotita, control = ctree_control(maxdepth = 5))
   
   # plot(arbol_pelotita, gp = gpar(fontsize = 5)) 
   
