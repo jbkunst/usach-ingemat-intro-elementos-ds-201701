@@ -9,23 +9,33 @@ glimpse(data)
 
 row <- sample(nrow(data), size = 1)
 
+data %>% filter(row_number() == row)
+
 photo <- data_frame(x = rep(1:28, times=28), y = rep(28:1, each = 28),
-                    shade = as.numeric(data[row,-1]))
+                    shade = as.numeric(data[row,-1]),
+                    px = 1:(28*28))
 
+photo
 summary(photo$shade)
-
 ggplot(data=photo) +
   geom_point(aes(x = x, y = y, color = shade), size=11, shape=15) +
   scale_color_gradient(low = "white", high = "black") +
   theme(legend.position = "none")
-  
+
+ggplot(data=photo) +
+  geom_label(aes(x = x, y = y, label = px), size = 2) +
+  theme(legend.position = "none")
+
+
+count(data, label)  
+
 # algunos cosas necesarias
 data <- mutate(data, label = factor(label))
 
 # tamohs ready
 glimpse(data)
 
-
+set.seed(123)
 s <- sample(c("train", "test"), size = nrow(data), replace = TRUE)
 
 data_test <- filter(data, s == "train")
@@ -36,6 +46,9 @@ data_train <- filter(data, s == "test")
 mod_ilu <- ctree(label ~ ., data = data_test) #  :O
 plot(mod_ilu)
 plot(mod_ilu, gp = gpar(fontsize = 5)) 
+
+plot( ctree(label ~ ., data = data_test, control = ctree_control(maxdepth = 4)),
+      gp = gpar(fontsize = 5)) 
 
 data_test <- data_test %>%
   mutate(mod_ilu_pred = predict(mod_ilu, newdata = data_test))
@@ -63,7 +76,6 @@ P <- round(sqrt(ncol(data_train)))
 
 haceme_un_arbolito <- function() {
   
-  
   p <- sample(2:ncol(data), size = P)
   print(names(data_train)[p])
   
@@ -82,8 +94,6 @@ haceme_un_arbolito <- function() {
 haceme_un_arbolito()
 
 bosque <- list()
-
-
 
 for(i in 1:M) {
   
@@ -181,4 +191,19 @@ data_test %>%
   spread(mod_rf, n) %>% 
   ungroup() 
 
+dfimp <- importance(bosque_verdad) %>% 
+  as.data.frame() %>% 
+  tibble::rownames_to_column() %>% 
+  tbl_df() %>%
+  mutate(
+    x = rep(1:28, times=28), y = rep(28:1, each = 28)
+  )
+
+dfimp
+
+ggplot(dfimp) + 
+  geom_point(aes(rowname, MeanDecreaseGini))
+  
+ggplot(dfimp) + 
+  geom_tile(aes(x = x, y = y, fill = MeanDecreaseGini))
 
